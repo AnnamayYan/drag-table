@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+      #wrap-box {
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        /*text-align: center;*/
+        overflow: scroll;
+        display: none;
+        background-color: #fff;
+      }
+      .edit-wrap {
+        position: relative;
+        display: inline-block;
+      }
+      table {
+        border-collapse: collapse;
+        border: 1px solid #ddd;
+        margin: auto;
+        table-layout: fixed;
+      }
+      table td, table th {
+        border: 1px solid #ddd;
+        min-height: 40px;
+        height: 40px;
+        text-align: center;
+        word-break: break-word;
+        box-sizing: border-box;
+      }
+      #wrap-box .resize-proxy {
+        width: 0;
+        border-left: 1px dashed red;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        display: none;
+      }
+
+      .btn-box {
+        text-align: center;
+        margin: 20px 0;
+      }
+      .btn-box .btn {
+        display: inline-block;
+        width: 100px;
+        height: 40px;
+        line-height: 40px;
+        border-radius: 6px;
+        text-align: center;
+        color: #fff;
+        font-size: 16px;
+        background-color: #67C23A;
+        cursor: pointer;
+      }
+      .btn-box .btn.preview {
+        background-color: #409EFF;
+        margin-right: 10px;
+      }
+      .btn-box .btn.cancel {
+        background-color: #909399;
+      }
+  </style>
+</head>
+<body>
+  <div>
+    <div class="table-box">
+      <table style="width: 900px; border: 1px solid rgb(0, 0, 0); border-collapse: collapse; margin: 0px auto;" align="center"> 
+       <tbody> 
+        <tr style="height:50px" class="firstRow"> 
+         <td style="padding: 0px 7px; border: 1px solid rgb(0, 0, 0); height: 30px; font-family: 宋体; text-align: center;" width="16" valign="center"><p style="text-align:center"><span style=";font-family:宋体;font-size:14px">ID</span></p></td> 
+         <td colspan="1" rowspan="1" style="border: 1px solid rgb(0, 0, 0); height: 30px; font-family: 宋体; text-align: center;" width="71" valign="center"><p style="text-align:center"><span style=";font-family:宋体;font-size:14px">公司</span></p></td> 
+         <td style="padding: 0px 7px; border: 1px solid rgb(0, 0, 0); height: 30px; font-family: 宋体; text-align: center;" width="37" valign="center"><p style="text-align:center"><span style=";font-family:宋体;font-size:14px">早餐就餐次数</span></p></td> 
+         <td style="padding: 0px 7px; border: 1px solid rgb(0, 0, 0); word-break: break-all; height: 30px; font-family: 宋体; text-align: center;" width="43" valign="center"><p style="text-align:center"><span style="font-size: 14px;"><font face="宋体">早餐就餐标准(</font><span style="font-family: 宋体;">元</span><font face="Calibri"><span style="font-size: 14px; font-family: 宋体, SimSun;">)</span></font></span></p></td> 
+         <td style="padding: 0px 7px; border: 1px solid rgb(0, 0, 0); word-break: break-all; height: 30px; font-family: 宋体; text-align: center;" width="51" valign="center"><p style="text-align:center"><span style=";font-family:宋体;font-size:14px">早餐费用小计</span><span style=";font-family:宋体;font-size:14px">(<span style="font-family:宋体">元<span style="font-family: 宋体, SimSun; font-size: 14px; text-align: center;">)</span></span></span></p></td> 
+         <td style="padding: 0px 7px; border: 1px solid rgb(0, 0, 0); height: 30px; font-family: 宋体; text-align: center;" width="48" valign="center"><p style="text-align:center"><span style=";font-family:宋体;font-size:14px">午餐就餐次数</span></p></td> 
+         <td style="padding: 0px 7px; border: 1px solid rgb(0, 0, 0); word-break: break-all; height: 30px; font-family: 宋体; text-align: center;" width="40" valign="center"><p style="text-align:center"><span style=";font-family:宋体;font-size:14px">午餐就餐标准</span><span style=";font-family:宋体;font-size:14px">(<span style="font-family:宋体">元<span style="font-family: 宋体, SimSun; font-size: 14px; text-align: center;">)</span></span></span></p></td> 
+         <td style="padding: 0px 7px; border: 1px solid rgb(0, 0, 0); word-break: break-all; height: 30px; font-family: 宋体; text-align: center;" width="63" valign="center"><p style="text-align:center"><span style=";font-family:宋体;font-size:14px">午餐费用小计</span><span style=";font-family:宋体;font-size:14px">(<span style="font-family:宋体">元<span style="font-family: 宋体, SimSun; font-size: 14px; text-align: center;">)</span></span></span></p></td> 
+         <td style="padding: 0px 7px; border: 1px solid rgb(0, 0, 0); height: 30px; font-family: 宋体; text-align: center;" width="37" valign="center"><p style="text-align:center"><span style=";font-family:宋体;font-size:14px">晚餐就餐次数</span></p></td> 
+         <td style="padding: 0px 7px; border: 1px solid rgb(0, 0, 0); word-break: break-all; height: 30px; font-family: 宋体; text-align: center;" width="47" valign="center"><p style="text-align:center"><span style=";font-family:宋体;font-size:14px">晚餐就餐标准</span><span style=";font-family:宋体;font-size:14px">(<span style="font-family:宋体">元<span style="font-family: 宋体, SimSun; font-size: 14px; text-align: center;">)</span></span></span></p></td> 
+         <td style="padding: 0px 7px; border: 1px solid rgb(0, 0, 0); word-break: break-all; height: 30px; font-family: 宋体; text-align: center;" width="62" valign="center"><p style="text-align:center"><span style=";font-family:宋体;font-size:14px">晚餐费用小计</span><span style=";font-family:宋体;font-size:14px">(<span style="font-family:宋体">元<span style="font-family: 宋体, SimSun; font-size: 14px; text-align: center;">)</span></span></span></p></td> 
+         <td style="padding: 0px 7px; border: 1px solid rgb(0, 0, 0); height: 30px; font-family: 宋体; text-align: center;" width="41" valign="center"><p style="text-align:center"><span style=";font-family:宋体;font-size:14px">餐厅服务费</span></p></td> 
+         <td style="padding: 0px 7px; border: 1px solid rgb(0, 0, 0); height: 30px; font-family: 宋体; text-align: center;" width="27" valign="center"><p style="text-align:center"><span style=";font-family:宋体;font-size:14px">其他</span></p></td> 
+         <td style="padding: 0px 7px; border: 1px solid rgb(0, 0, 0); word-break: break-all; height: 30px; font-family: 宋体; text-align: center;" width="55" valign="center"><p style="text-align:center"><span style=";font-family:宋体;font-size:14px">合计金额</span><span style=";font-family:宋体;font-size:14px">(<span style="font-family:宋体">元<span style="font-family: 宋体, SimSun; font-size: 14px; text-align: center;">)</span></span></span></p></td> 
+         <td colspan="1" rowspan="1" style="border: 1px solid rgb(0, 0, 0); word-break: break-all; height: 30px; font-family: 宋体; text-align: center;" width="25" valign="center"><p><span style="font-family: 宋体, SimSun;">&#8203;备注</span></p></td> 
+        </tr><tr><td t="n" id="sjs-A2" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">1</td><td t="s" id="sjs-B2" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">啊啊公司</td><td t="n" id="sjs-C2" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">2720</td><td t="n" id="sjs-D2" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">3.5</td><td t="n" id="sjs-E2" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">8806</td><td t="s" id="sjs-F2" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="s" id="sjs-G2" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="s" id="sjs-H2" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="s" id="sjs-I2" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="s" id="sjs-J2" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="s" id="sjs-K2" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="n" id="sjs-L2" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">2300</td><td t="s" id="sjs-M2" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="n" id="sjs-N2" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">25698</td><td t="z" id="sjs-O2" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);"></td></tr><tr><td t="n" id="sjs-A3" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">2</td><td t="s" id="sjs-B3" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">今今恰饭集团</td><td t="n" id="sjs-C3" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">6778</td><td t="n" id="sjs-D3" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">3.5</td><td t="n" id="sjs-E3" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">16853</td><td t="s" id="sjs-F3" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="s" id="sjs-G3" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="s" id="sjs-H3" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="s" id="sjs-I3" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="s" id="sjs-J3" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="s" id="sjs-K3" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="n" id="sjs-L3" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">5600</td><td t="s" id="sjs-M3" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="n" id="sjs-N3" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">23567</td><td t="z" id="sjs-O3" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);"></td></tr><tr><td t="n" id="sjs-A4" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">3</td><td t="s" id="sjs-B4" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">天天公司</td><td t="n" id="sjs-C4" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">2306</td><td t="n" id="sjs-D4" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">3.5</td><td t="n" id="sjs-E4" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">5519.6</td><td t="s" id="sjs-F4" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="s" id="sjs-G4" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="s" id="sjs-H4" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="s" id="sjs-I4" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="s" id="sjs-J4" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="s" id="sjs-K4" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="n" id="sjs-L4" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">3600</td><td t="s" id="sjs-M4" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="n" id="sjs-N4" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">18099.0</td><td t="z" id="sjs-O4" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);"></td></tr><tr><td t="n" id="sjs-A5" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">4</td><td t="s" id="sjs-B5" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">是是公司</td><td t="n" id="sjs-C5" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">4160</td><td t="n" id="sjs-D5" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">3.5</td><td t="n" id="sjs-E5" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">20897</td><td t="s" id="sjs-F5" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="s" id="sjs-G5" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="s" id="sjs-H5" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="s" id="sjs-I5" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="s" id="sjs-J5" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="s" id="sjs-K5" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="n" id="sjs-L5" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">4500</td><td t="s" id="sjs-M5" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="n" id="sjs-N5" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">35678</td><td t="z" id="sjs-O5" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);"></td></tr><tr><td t="n" id="sjs-A6" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">5</td><td t="s" id="sjs-B6" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">周周公司</td><td t="n" id="sjs-C6" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">5067</td><td t="n" id="sjs-D6" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">3.5</td><td t="n" id="sjs-E6" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">3355.9</td><td t="s" id="sjs-F6" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="s" id="sjs-G6" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="s" id="sjs-H6" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="s" id="sjs-I6" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="s" id="sjs-J6" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="s" id="sjs-K6" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="n" id="sjs-L6" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">2600</td><td t="s" id="sjs-M6" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="n" id="sjs-N6" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">15678.9</td><td t="z" id="sjs-O6" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);"></td></tr><tr><td t="n" id="sjs-A7" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">6</td><td t="s" id="sjs-B7" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">六六公司</td><td t="n" id="sjs-C7" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">2567</td><td t="n" id="sjs-D7" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">3.5</td><td t="n" id="sjs-E7" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">4576.4</td><td t="s" id="sjs-F7" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="s" id="sjs-G7" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="s" id="sjs-H7" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="s" id="sjs-I7" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="s" id="sjs-J7" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="s" id="sjs-K7" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="n" id="sjs-L7" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">2600</td><td t="s" id="sjs-M7" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">/</td><td t="n" id="sjs-N7" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">25678.0</td><td t="z" id="sjs-O7" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);"></td></tr><tr><td t="z" id="sjs-A8" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);"></td><td t="z" id="sjs-B8" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);"></td><td t="z" id="sjs-C8" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);"></td><td t="z" id="sjs-D8" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);"></td><td t="z" id="sjs-E8" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);"></td><td t="z" id="sjs-F8" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);"></td><td t="z" id="sjs-G8" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);"></td><td t="z" id="sjs-H8" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);"></td><td t="z" id="sjs-I8" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);"></td><td t="z" id="sjs-J8" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);"></td><td t="z" id="sjs-K8" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);"></td><td t="z" id="sjs-L8" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);"></td><td t="z" id="sjs-M8" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);"></td><td t="z" id="sjs-N8" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);"></td><td t="z" id="sjs-O8" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);"></td></tr><tr><td colspan="2" t="s" id="sjs-A9" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">总金额(元)</td><td colspan="5" t="s" id="sjs-C9" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">89760.50元</td><td colspan="2" t="s" id="sjs-H9" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">总金额(大写)</td><td colspan="6" t="s" id="sjs-J9" style="height: 30px; font-family: 宋体; text-align: center; border: 1px solid rgb(0, 0, 0);">捌万玖仟柒佰陆拾元伍角</td></tr> 
+        <tr style="height:30px"> 
+         <td colspan="3" style="padding: 0px 7px; border: 1px solid rgb(0, 0, 0); height: 30px; font-family: 宋体; text-align: center;" width="158" valign="center"><p style="text-align:center"><span style=";font-family:宋体;font-size:14px">&#8203;发起人</span></p></td> 
+         <td colspan="3" style="padding: 0px 7px; border: 1px solid rgb(0, 0, 0); height: 30px; font-family: 宋体; text-align: center;" width="177" valign="center"><p style="text-align:center"><span style=";font-family:宋体;font-size:14px">经手人</span></p></td> 
+         <td colspan="3" style="padding: 0px 7px; border: 1px solid rgb(0, 0, 0); height: 30px; font-family: 宋体; text-align: center;" width="165" valign="center"><p style="text-align:center"><span style=";font-family:宋体;font-size:14px">办公室意见</span></p></td> 
+         <td colspan="6" style="padding: 0px 7px; border: 1px solid rgb(0, 0, 0); word-break: break-all; height: 30px; font-family: 宋体; text-align: center;" rowspan="1" valign="center"><p style="text-align:center"><span style=";font-family:宋体;font-size:14px">最后批示</span></p></td> 
+        </tr> 
+        <tr style="height:100px"> 
+         <td colspan="3" style="padding: 0px 7px; border: 1px solid rgb(0, 0, 0); word-break: break-all; height: 30px; font-family: 宋体; text-align: center;" width="158" valign="center">阿May</td> 
+         <td colspan="3" style="padding: 0px 7px; border: 1px solid rgb(0, 0, 0); word-break: break-all; height: 30px; font-family: 宋体; text-align: center;" width="177" valign="center"><span><span class="content" contenteditable="false">同意 [2020-08-20 08:32:06]<br>已核对 [2020-08-19 12:30:37]<br></span></span>&#8203;</td> 
+         <td colspan="3" style="padding: 0px 7px; border: 1px solid rgb(0, 0, 0); word-break: break-all; height: 30px; font-family: 宋体; text-align: center;" width="165" valign="center"><span><span class="content deOrder" contenteditable="false">同意。 [2020-08-20 16:20:39]<br>同意 [安白 2020-08-20 17:09:07]<br></span></span>&#8203;</td> 
+         <td colspan="6" style="padding: 0px 7px; border: 1px solid rgb(0, 0, 0); word-break: break-all; height: 30px; font-family: 宋体; text-align: center;" rowspan="1" valign="center"><span><span class="content" contenteditable="false">同意! [2020-08-20 16:29:35]<br></span></span>&#8203;</td> 
+        </tr> 
+       </tbody> 
+      </table>
+    </div>
+    <div class="btn-box">
+      <div class="btn preview">打印调整</div>
+      <div class="btn print">立即打印</div>
+    </div>
+  </div>
+  <div id="wrap-box">
+    <div>拖动表头竖线，调整单元格宽度</div>
+    <div class="edit-wrap">
+      <!-- 要进行调整的table -->
+    </div>
+    <div class="resize-proxy"></div>
+    <div class="btn-box">
+      <div class="btn cancel" id="cancel">取消</div>
+      <div class="btn" id="editPrint">立即打印</div>
+    </div>
+  </div>
+
+  <script src="jquery.min.js"></script>
+  <script>
+    $(function(){
+      $('.preview').on('click', function() {
+        $('.edit-wrap').html($('.table-box').html());
+        $('#wrap-box').show();
+        getTdWidth();
+        tableLeft = $('#wrap-box table')[0].getBoundingClientRect().left;
+      });
+      $('.print').on('click', function() {
+        exportPuts('.table-box');
+      });
+      $('#cancel').on('click',function(){
+        $('#wrap-box').hide();
+      });
+      $('#editPrint').on('click',function(){
+        exportPuts('.edit-wrap');
+      });
+
+      // 去打印
+      function exportPuts(printElement){ 
+        let prnhtml = $(printElement).html();
+        var newWin = window.open("","打印");
+        newWin.document.head.innerHTML=`<style>${$('style').text()}</style>`;
+        newWin.document.body.innerHTML=prnhtml;
+        newWin.print();//打印
+        newWin.close();//点击取消的时候关闭打印窗口
+      }
+
+      // 获取第一行td宽度，插入colgroup，用col控制拖拽td的宽度
+      function getTdWidth() {
+        let html=`<colgroup>`;
+        $('#wrap-box table tr:eq(0) td, table tr:eq(0) th').each(function(index, e){
+          // console.log(e.getBoundingClientRect());
+          html+=`<col name="col${index}" style="width: ${e.getBoundingClientRect().width}px;">`;
+        })
+        html+=`</colgroup>`;
+        $('#wrap-box table').prepend(html);
+      }
+
+      var tableLeft = 0;
+      var draggingColumn = null;
+      // 给表格第一行的tr的td添加监听事件
+      $('#wrap-box').on('mousemove', 'table tr:eq(0) td, table tr:eq(0) th', function(e) {
+        let { pageX } = e;
+        let { width, right } = e.currentTarget.getBoundingClientRect();
+        // console.log(e.currentTarget.getBoundingClientRect());
+        // console.log(width, right, pageX);
+        if(width>12 && right - pageX < 8) {
+          $('body').css('cursor', 'col-resize');
+          draggingColumn = e.currentTarget;
+        }else{
+          $('body').css('cursor', '');
+          draggingColumn = null;
+        }
+      });
+
+      $('#wrap-box').on('mousedown', 'table tr:eq(0) td, table tr:eq(0) th', function(e) {
+        if(draggingColumn) {
+          const _this = $(this);
+          let columnEl = e.currentTarget;
+          let columnRect = columnEl.getBoundingClientRect();
+          let dragState = {
+            startMouseLeft: e.clientX,
+            startColumnLeft: columnRect.left - tableLeft,
+            startLeft: columnRect.right - tableLeft
+          }
+
+          // 单元格拖拽最小宽度
+          let minLeft = dragState.startColumnLeft + 30;
+
+          // 显示拖拽竖线,默认left距离为startLeft
+          let proxyLeft = dragState.startLeft;
+          $('#wrap-box .resize-proxy').show();
+          $('#wrap-box .resize-proxy').css('left', proxyLeft)
+
+          const handleMouseMove = (event) => {
+            let deltaLeft = event.clientX - dragState.startMouseLeft;
+            proxyLeft = dragState.startLeft + deltaLeft;
+
+            // 修改拖拽竖线的位置,不能超过最小宽度
+            proxyLeft = Math.max(proxyLeft, minLeft);
+            $('#wrap-box .resize-proxy').css('left', proxyLeft);
+          }
+
+
+          // 禁止拖拽和选中事件
+          document.onselectstart = function() { return false; }
+          document.ondragstart = function() { return false; }
+
+          const handleMouseUp = function(e) {
+            const finalLeft = parseInt(proxyLeft, 10);
+            const columnWidth = finalLeft - dragState.startColumnLeft;
+            _this.css('width', columnWidth);
+            $('#wrap-box table col[name=col'+_this.index()+']').css('width', columnWidth);
+            $('body').css('cursor', '');
+            $('#wrap-box .resize-proxy').hide();
+
+            draggingColumn = null;
+            document.removeEventListener('mousemove', handleMouseMove);
+            document.removeEventListener('mouseup', handleMouseUp);
+            document.onselectstart = null;
+            document.ondragstart = null;
+          }
+
+
+          document.addEventListener('mousemove', handleMouseMove);
+          document.addEventListener('mouseup', handleMouseUp);
+        }
+      });
+
+      // 当鼠标移出table时，修改cursor
+      $('#wrap-box').on('mouseout', 'table', function() {
+        $('body').css('cursor', '');
+      });
+    })
+    
+
+  </script>
+</body>
+</html>
