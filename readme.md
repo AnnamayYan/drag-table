@@ -5,5 +5,5 @@
 * [在线预览](https://annamayyan.github.io/drag-table/table.html)
 
 <p>
-  <img width="400" src="https://annamayyan.github.io/drag-table/gv8e7-ju8bk.gif">
+  <img width="400" src="https://raw.githubusercontent.com/AnnamayYan/drag-table/master/gv8e7-ju8bk.gif">
 </p>  
